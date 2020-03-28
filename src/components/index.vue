@@ -1,12 +1,12 @@
 <template>
   <div class="post">
-    <a-input placeholder="请输入任务" class="my_ipt"/>
+    <a-input placeholder="请输入任务"  class="my_ipt" :value="inputValue"/>
     <a-button type="primary" >添加事项</a-button>
 
-    <a-list bordered class="dt_list">
+    <a-list bordered :dataSource="list" class="dt_list">
       <a-list-item slot="renderItem" slot-scope="item">
         <!-- 复选框 -->
-        <a-checkbox>{{item.info}}</a-checkbox>
+        <a-checkbox >{{item.info}}</a-checkbox>
         <!-- 删除链接 -->
         <a slot="actions">删除</a>
       </a-list-item>
@@ -29,20 +29,21 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
   data () {
     return {
-      
     }
   },
   methods: {
 
   },
-  computer: {
-
+  computed: {
+  ...mapState(['list','inputValue'])
   },
   created(){
-
+    //执行异步操作getList
+    this.$store.dispatch('getList');
   }
 }
 </script>
@@ -51,5 +52,20 @@ export default {
 <style>
 .post{
   padding: 10px;
+}
+.my_ipt {
+  width: 500px;
+  margin-right: 10px;
+}
+
+.dt_list {
+  width: 500px;
+  margin-top: 10px;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 </style>

@@ -8,7 +8,7 @@ import VueAxios from 'vue-axios'
 import Vuex from 'vuex'
 import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
-import stroe from './stroe'
+import store from './store'
 
 
 
@@ -23,6 +23,7 @@ Vue.use(VueAxios, axios)
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
