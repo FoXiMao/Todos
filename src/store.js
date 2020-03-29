@@ -95,6 +95,10 @@ export default new Vuex.Store({
                     
                         return state.list
                 
+                },
+                //统计完成项目的条数
+                getDoneLength(state){
+                    return state.list.filter(x => x.done === true).length
                 }
             }
   
