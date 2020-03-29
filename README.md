@@ -19,7 +19,8 @@ vue+vuex+axios+ant-design-vue
 
 ### 截图
 
-![图一](https://s1.ax1x.com/2020/03/29/GZSn3T.png)
-![图二](https://s1.ax1x.com/2020/03/29/GZSZ40.png)
-![图三](https://s1.ax1x.com/2020/03/29/GZSmCV.png)
+![1.png](https://i.loli.net/2020/03/29/FgQqz27mGoRW9l6.png)
+![2.png](https://i.loli.net/2020/03/29/FQ4GmeEyYvCf5BI.png)
+![3.png](https://i.loli.net/2020/03/29/gMVmND7SYhOIebE.png)
+
 
