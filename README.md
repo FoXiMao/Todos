@@ -14,3 +14,12 @@ vue+vuex+axios+ant-design-vue
 ⑦ 统计未完成的任务的条数
 ⑧ 清除已完成的任务事项
 ⑨ 实现任务列表数据的动态切换
+
+-----------------
+
+### 截图
+
+![图一](https://s1.ax1x.com/2020/03/29/GZSn3T.png)
+![图二](https://s1.ax1x.com/2020/03/29/GZSZ40.png)
+![图三](https://s1.ax1x.com/2020/03/29/GZSmCV.png)
+
