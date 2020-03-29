@@ -1,14 +1,14 @@
 <template>
   <div class="post">
-    <a-input placeholder="请输入任务"  class="my_ipt" :value="inputValue"/>
-    <a-button type="primary" >添加事项</a-button>
+    <a-input placeholder="请输入任务..."  class="my_ipt" :value="inputValue" @change="handleImputChange"/>
+    <a-button type="primary" @click="addItemtoList" >添加事项</a-button>
 
     <a-list bordered :dataSource="list" class="dt_list">
       <a-list-item slot="renderItem" slot-scope="item">
         <!-- 复选框 -->
         <a-checkbox >{{item.info}}</a-checkbox>
         <!-- 删除链接 -->
-        <a slot="actions">删除</a>
+        <a slot="actions" @click="removeItembyId(item.id)">删除</a>
       </a-list-item>
 
       <!-- footer区域 -->
@@ -36,6 +36,24 @@ export default {
     }
   },
   methods: {
+    //监听文本框变化
+    handleImputChange(e){
+   
+    this.$store.commit('setInputValue',e.target.value)
+    },
+    //向列表中添加item项
+    addItemtoList() {
+      //判断输入框是否为空
+      if(this.inputValue.trim().length <= 0){
+        return this.$message.warning("新增项不能为空");
+      }
+      this.$store.commit('addItem')
+    },
+    //根据id删除列表项
+    removeItembyId(id){
+       // console.log(id);
+       this.$store.commit('remonvItem',id)
+    }
 
   },
   computed: {
