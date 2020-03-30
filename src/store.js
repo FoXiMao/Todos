@@ -14,7 +14,8 @@ export default new Vuex.Store({
                 inputValue: '',
                 //下一个Id
                 nextId: 0,
-                viewKey: 'all'
+                viewKey: 'all',
+                once: '1',
             },
             //变更数据
             mutations: {
@@ -81,7 +82,25 @@ export default new Vuex.Store({
                 changeViewKey(state,key) {
                     state.viewKey = key
                 },
-                
+                //插入初始数据
+                onceAdd(state){
+                    //定义一个数组
+                    const obj = [{
+                        id: 0,
+                        info: '欢迎使用My Todos！',
+                        done: true
+                    }]
+                    //取出LocalStorage中的数据
+                   var onceItem =  JSON.parse(localStorage.getItem("once"))
+                    //如果取出的不是"1"则插入数据
+                   if(onceItem !== '1'  ){
+                         localStorage.setItem('accessToken',JSON.stringify(obj) )
+                    }
+                    //插入once 数值为'1'
+                     localStorage.setItem('once',JSON.stringify(state.once) )
+                    //console.log(onceItem)
+                    //state.nextId++
+                }
             },
             //异步操作任务
             actions: {

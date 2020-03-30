@@ -22,19 +22,25 @@
           <!-- 卡片描述 -->
           <a-card-meta title="My Todos" description="论堕落的自我修养">
           </a-card-meta>
-        </a-card>
-        <a-card hoverable style="width: 300px">
-          <a-card-meta title="当前版本" description="V1.0">
-          </a-card-meta>
-        </a-card>
-        <a-card hoverable style="width: 300px">
+       </a-card>
+       <a-card hoverable style="width: 300px">
           <a-card-meta title="软件作者" description="Citrons">
           </a-card-meta>
-        </a-card>
-        <a-card hoverable style="width: 300px">
-          <a-card-meta title="亲爱的" description="我爱你，只有风知道">
+       </a-card>
+       <a-card hoverable style="width: 300px">
+          <a-card-meta title="当前版本" description="V1.0">
           </a-card-meta>
-        </a-card>
+       </a-card>
+       <a-card hoverable style="width: 300px">
+              我爱你只有风知道
+       </a-card>
+       <a-card hoverable style="width: 300px">
+             你好，我是My Todos的开发者Citrons。非常高兴您的使用。My Todos只是一个初生的软件，它的成长还需要大家来共同出谋划策，才能使它变得更好，如果您有什么建议或者发现了Bug，请及时联系我，谢谢！
+       </a-card>
+       <a-card hoverable style="width: 300px">
+           <a href="https://jq.qq.com/?_wv=1027&k=5NdSS4g">加入群聊</a>
+       </a-card>
+     
     </a-modal>
     <a-row type="flex" justify="center" class="my_ipt">
       <!-- 输入框区域 -->
@@ -156,7 +162,8 @@ export default {
   created(){
     //执行异步操作getList
     //this.$store.dispatch('getList');
-    this.$store.commit('getLocalStore');
+     this.$store.commit('onceAdd');
+     this.$store.commit('getLocalStore');
   }
 }
 </script>
