@@ -2,9 +2,40 @@
   <div>
     <a-affix :offsetTop="this.top">
     <a-menu v-model="current" mode="horizontal" class="header">
-      <a-menu-item key="home"> My Todos </a-menu-item>
+      <a-menu-item @click="() => modal2Visible = true" key="home"> My Todos </a-menu-item>
     </a-menu>
       </a-affix>
+      <!-- 点击标题弹出框 -->
+      <a-modal
+      title="About My Todos"
+      centered
+      v-model="modal2Visible"
+      @ok="() => modal2Visible = false"
+    >
+       <a-card hoverable style="width: 300px">
+         <!-- 头图 -->
+          <img
+            alt="Todo"
+            src="../assets/about.png"
+            slot="cover"
+          />
+          <!-- 卡片描述 -->
+          <a-card-meta title="My Todos" description="论堕落的自我修养">
+          </a-card-meta>
+        </a-card>
+        <a-card hoverable style="width: 300px">
+          <a-card-meta title="当前版本" description="V1.0">
+          </a-card-meta>
+        </a-card>
+        <a-card hoverable style="width: 300px">
+          <a-card-meta title="软件作者" description="Citrons">
+          </a-card-meta>
+        </a-card>
+        <a-card hoverable style="width: 300px">
+          <a-card-meta title="亲爱的" description="我爱你，只有风知道">
+          </a-card-meta>
+        </a-card>
+    </a-modal>
     <a-row type="flex" justify="center" class="my_ipt">
       <!-- 输入框区域 -->
       <a-col :span="15">  <a-input  placeholder="请输入任务..."  :value="inputValue" @change="handleImputChange"/></a-col>
@@ -22,7 +53,7 @@
           <a-affix :offsetTop="this.donetop">
        <a-row type="flex" justify="center">
         <a-button-group> 
-          <a-button :type="viewKey ==='all'?'primary':'default'" @click="changeList('all')">全部</a-button>   
+          <a-button :type="viewKey ==='all'?'primary':'default'" @click="changeList('all')">全部</a-button>  
           <a-button :type="viewKey ==='undone'?'primary':'default'" @click="changeList('undone')">未完成</a-button>
           <a-button :type="viewKey ==='done'?'primary':'default'" @click="changeList('done')">已完成</a-button>
             <!-- 把已经完成的任务清空 -->
@@ -60,6 +91,7 @@ export default {
         top: 0,
         bottom: 0,
         donetop: 50,
+        modal2Visible: false,
     }
   },
   methods: {
@@ -108,7 +140,7 @@ export default {
     changeList(key){
       //console.log(key)
       this.$store.commit('changeViewKey',key)
-    }
+    },
 
   },
   computed: {
