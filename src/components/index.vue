@@ -106,12 +106,16 @@ export default {
       if(this.inputValue.trim().length <= 0){
         return this.$message.warning("新增项不能为空");
       }
+      this.$store.commit('getLocalStore')
       this.$store.commit('addItem')
+      this.$store.commit('intoLocalStore')
+      
     },
     //根据id删除列表项
     removeItembyId(id){
        // console.log(id);
        this.$store.commit('remonvItem',id)
+        this.$store.commit('intoLocalStore')
     },
     //监听复选框状态变化的事件
     cbStatusChange(e,id){
@@ -123,6 +127,7 @@ export default {
         status: e.target.checked
       }
       this.$store.commit('changeStatus',param)
+           this.$store.commit('intoLocalStore')
     },
     //清除已完成列表项
     clean(){
@@ -130,6 +135,7 @@ export default {
       //只有在完成列表项小于等于0向时才弹出弹窗
       if(this.getDoneLength > 0){
          this.$store.commit('cleanDone')
+        this.$store.commit('intoLocalStore')
       return this.$message.success("清除完成");
       }else{
         return this.$message.warning("嗷呜~~没有已完成的数据哦~~");
@@ -149,7 +155,8 @@ export default {
   },
   created(){
     //执行异步操作getList
-    this.$store.dispatch('getList');
+    //this.$store.dispatch('getList');
+    this.$store.commit('getLocalStore');
   }
 }
 </script>

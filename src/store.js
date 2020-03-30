@@ -9,10 +9,11 @@ export default new Vuex.Store({
             state: {
                 //列表数据
                 list: [], 
+                item: [],
                 //输入框默认显示文字
                 inputValue: '',
                 //下一个Id
-                nextId: 5,
+                nextId: 0,
                 viewKey: 'all'
             },
             //变更数据
@@ -24,6 +25,17 @@ export default new Vuex.Store({
                 setInputValue(state,val){
                     state.inputValue = val
                 },
+                //获取localStorage中的数组
+                getLocalStore(state ) {
+                  //  将获取到的数据放入临时库
+                  let itemList =  JSON.parse(localStorage.getItem("accessToken"))
+                  //这是是个判断，我也不知道为什么加，如果返回值不是null才将值传给state.list
+                   if(itemList !== null){
+                     state.list = itemList
+                    //console.log(itemList)
+                    }
+                },
+ 
                 //添加列表项目
                 addItem(state){
                     const obj = {
@@ -33,10 +45,17 @@ export default new Vuex.Store({
                     }
                     //向list数组中追加obj
                     state.list.push(obj)
+                    //localStorage.setItem('accessToken', 'Bearer ' +JSON.stringify(obj) )
                     //由于没写后端则将id写死，自增
                     state.nextId++
                     //清空输入框
                     state.inputValue = ''
+                },
+                //将state.list存入localStorage
+                intoLocalStore(state) {
+                    let obj = state.list
+                    localStorage.removeItem('accessToken')
+                  localStorage.setItem('accessToken',JSON.stringify(obj) )
                 },
                 //删除列表项
                 remonvItem(state,id) {
@@ -46,7 +65,6 @@ export default new Vuex.Store({
                     if(i !== -1){
                         state.list.splice(i,1)
                     }
-
                 },
                 //修改列表选中状态
                 changeStatus(state,param) {
@@ -62,18 +80,20 @@ export default new Vuex.Store({
                 //修改视图的关键字
                 changeViewKey(state,key) {
                     state.viewKey = key
-                }
+                },
+                
             },
             //异步操作任务
             actions: {
                 //获取list
-                getList(context) {
-                    axios.get('./static/list.json').then((data) =>{
-                        //console.log(data.data)
-                        context.commit('initList',data.data)
+                // getList(context) {
+                //     axios.get('./static/list.json').then((data) =>{
+                //         //console.log(data.data)
+                //         context.commit('initList',data.data)
                         
-                    })
-                }
+                //     })
+                // }
+            
             },
             getters: {
                 //统计未完成项目的条数
