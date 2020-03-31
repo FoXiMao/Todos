@@ -1,10 +1,8 @@
 <template>
   <div>
-    <a-affix :offsetTop="this.top">
     <a-menu v-model="current" mode="horizontal" class="header">
       <a-menu-item @click="() => modal2Visible = true" key="home"> My Todos </a-menu-item>
     </a-menu>
-      </a-affix>
       <!-- 点击标题弹出框 -->
       <a-modal
       title="About My Todos"
@@ -56,7 +54,7 @@
         <!-- 未完成的任务个数 -->
         <!-- <span>{{unDonwLength}}条剩余</span> -->
         <!-- 操作按钮 -->
-          <a-affix :offsetTop="this.donetop">
+          <a-affix :offsetTop="this.top">
        <a-row type="flex" justify="center">
         <a-button-group> 
           <a-button :type="viewKey ==='all'?'primary':'default'" @click="changeList('all')">全部</a-button>  
