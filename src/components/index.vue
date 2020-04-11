@@ -1,8 +1,21 @@
 <template>
   <div>
-    <a-menu v-model="current" mode="horizontal" class="header">
+     <a-row type="flex" justify="center">
+      <a-col :span="4"> </a-col>
+      <a-col :span="16">
+         <a-menu v-model="current" mode="horizontal" class="header">
       <a-menu-item @click="() => modal2Visible = true" key="home"> My Todos </a-menu-item>
     </a-menu>
+    </a-col>
+      <a-col :span="4">
+        <div class="menu-list">
+       <a-badge :dot="show">
+        <a-icon @click="goBackup" type="inbox" :style="{ fontSize: '26px', color: '#08c' }"  />
+       </a-badge>
+       </div>
+      </a-col>
+    </a-row>
+   
     <a-row type="flex" justify="center" class="my_ipt">
       <!-- 输入框区域 -->
       <a-col :span="15">  <a-input  placeholder="请输入任务..."  :value="inputValue" @change="handleImputChange"/></a-col>
@@ -98,7 +111,7 @@
 
 <script>
 import {mapState,mapGetters} from 'vuex'
-//这是节流参数（只执行规定时间内的第一次操作）
+//这是节流参数
 function throttle(fn, interval) {
     var last;
     var timer;
@@ -120,7 +133,7 @@ function throttle(fn, interval) {
     }
 
 }
-//这是防抖参数（只执行规定时间内的最后一次操作）
+//这是防抖参数
 function debounce(func, wait=1000) {
    let timeout;  // 定时器变量
     return function(event) {
@@ -130,8 +143,8 @@ function debounce(func, wait=1000) {
         }, wait);  // 指定 xx ms 后触发真正想进行的操作 handler
     };
 }
-
 export default {
+  
   data () {
     return {
       current: ['home'],
@@ -141,6 +154,7 @@ export default {
         ModalText: '确认清除已完成的事项？',//清除已完成任务的提示文字
         visible: false,//对话框的状态
         confirmLoading: false,//清除已完成任务确认弹窗的确定按钮 loading
+        show: true,//小红点是否显示
     }
   },
   methods: {
@@ -222,7 +236,11 @@ export default {
      handleCancel(e) {
         this.visible = false;
       },
-
+      //点击回收站跳转路由
+      goBackup(){
+        this.show=false,
+        this.$router.push({name:'backup'})
+      }
 
   },
   computed: {
@@ -283,6 +301,10 @@ export default {
   .header{
 
     top: 0;
-
+  }
+  .menu-list{
+    transform: translate(-24%,79%);
+    padding-left:15px ;
+    /* size: 25px; */
   }
 </style>
